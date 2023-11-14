@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "containers": {
+    "demo": {
+      "name": "demo",
+      "image": {
+        "name": "simplews",
+        "origin": {
+          "type": "docker-file",
+          "details": {
+            "context_dir": "/",
+            "build_file": "/Dockerfile"
+          }
+        }
+      },
+      "config": {
+        "network": {
+          "public": "enable",
+          "hostname": "simplews",
+          "ports": ["80:80"]
+        },
+        "deploy": {
+          "instances": 1
+        }
+      }
+    },
+    "reach": {
+      "name": "reach",
+      "image": {
+        "name": "simplews-external",
+        "origin": {
+          "type": "docker-file",
+          "details": {
+            "url": "https://github.com/demouser/demofile.git"
+          },
+          "context_dir": "/",
+          "build_file": "/Dockerfile"
+        }
+      },
+      "config": {
+        "network": {
+          "public": "enable",
+          "hostname": "simplews",
+          "ports": ["80:80"]
+        },
+        "deploy": {
+          "instances": 1
+        }
+      }
+    }
+  }
+}
